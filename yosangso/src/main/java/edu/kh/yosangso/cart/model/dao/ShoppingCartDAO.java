@@ -95,7 +95,7 @@ public class ShoppingCartDAO {
 			String sql = prop.getProperty("updateCount");
 			pstmt = conn.prepareStatement(sql);
 			count = count-1;
-			pstmt.setInt(1, count );
+			pstmt.setInt(1, count);
 			pstmt.setString(2, memberNo);
 			pstmt.setString(3, productNo);
 			

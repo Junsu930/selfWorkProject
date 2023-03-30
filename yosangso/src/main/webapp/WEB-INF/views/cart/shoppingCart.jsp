@@ -44,13 +44,13 @@
                 <div>
                 	<form action="deleteCart" method="post">
                     	<button id="remove-button">전체 상품 삭제</button>
-                    	<input type="hidden" value="${cartList[0].memberNo }" name="memberNo">
+                    	<input type="hidden" value="${cartList[0].memberNo }" name="memberNo" id="memberNo">
                     </form>
                 </div>
             </div>
             <div class="cart-in-product">
                 <form action="addPayment" name="cart-form" method="post">
-               		<c:forEach var="list" items="${cartList}">
+               		<c:forEach var="list" items="${cartList}" varStatus="vs">
 	                    <div class="cart-in-product-border">
 	                        <!-- 이미지 -->
 	                        <div>
@@ -72,9 +72,11 @@
 	                        <!-- 수량 -->
 	                        <div class="counting">
 	                            <div>
-	                                <input type="text" id="counting-input" disabled value=${ list.buyingRate }>
-		                            <button type="button" onclick="plusCount" id="plus">+</button>
-	                                <button type="button" onclick="minusCount" id="minus">-</button>
+	                                <input type="text" class="counting-input" value=${ list.buyingRate } disabled >
+	                                <input type="hidden" class="productNo" name="productNo" value=${ list.productNo }>
+	                                <input type="hidden" class="hiddencount" name="count" value=${ list.buyingRate }>
+		                            <button type="button" onclick="plusCount(${vs.index})" id="plus">+</button>
+	                                <button type="button" onclick="minusCount(${vs.index})" id="minus">-</button>
 	                            </div>
 	                        </div>
 	                        <!-- 총 가격 -->

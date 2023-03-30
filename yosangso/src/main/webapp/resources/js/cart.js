@@ -14,4 +14,51 @@ $(document).ready(function(){
 });
 
 
-$('')
+function plusCount(index) {
+	
+	let countArr = document.getElementsByClassName("counting-input");
+	let productArr = document.getElementsByClassName("productNo");
+	
+	let memberNo = document.getElementById("memberNo").value;
+	let count = countArr[index].value;
+	let product = productArr[index].value;
+	
+	$.ajax({
+		url: "plusCount",
+		type:  "post",
+		data: {"memberNo": memberNo, "count":count, "product":product },
+		success: function(result){
+			if(result>0){
+				document.location.reload();
+				console.log("성공");
+			}
+		}
+	});
+	
+	
+}
+
+
+function minusCount(index) {
+	let countArr = document.getElementsByClassName("counting-input");
+	let productArr = document.getElementsByClassName("productNo");
+
+	let memberNo = document.getElementById("memberNo").value;
+	let count = countArr[index].value;
+	let product = productArr[index].value;
+	
+		$.ajax({
+		url: "minusCount",
+		type:  "post",
+		data: {"memberNo": memberNo, "count":count, "product":product },
+		success: function(result){
+			if(result>0){
+				document.location.reload();
+				console.log("성공");
+			}else{
+				document.location.reload();
+			}
+		}
+	});
+
+}
