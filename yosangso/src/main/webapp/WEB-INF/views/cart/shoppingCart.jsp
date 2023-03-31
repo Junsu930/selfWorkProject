@@ -55,7 +55,7 @@
 	                        <!-- 이미지 -->
 	                        <div>
 	                            <div class="img-div">
-	                                <img src="${contextPath}/resources/image/cart/NOW Foods, E-400, 268mg, 소프트젤 250정.jpg" id="image">
+	                                <img src="${contextPath}/resources/image/all/${list.productName}.jpg" id="image">
 	                            </div>
 	                        </div>
 	                        <!-- 이름과 가격 -->

@@ -30,7 +30,6 @@ public class RefundDAO {
 			String filePath = RefundDAO.class.getResource("/edu/kh/yosangso/sql/refund-sql.xml").getPath();
 			prop.loadFromXML(new FileInputStream(filePath));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -65,6 +64,44 @@ public class RefundDAO {
 			close(pstmt);
 		}
 		
+		
+		return result;
+	}
+
+	public int refundDone(Connection conn, String[] orderNoList) throws Exception {
+		int result = 0;
+		
+		for(int i=0; i<orderNoList.length; i++) {
+			try {
+				
+					String sql = prop.getProperty("refundDone");
+					pstmt = conn.prepareStatement(sql);
+					pstmt.setString(1, orderNoList[i]);
+					result= pstmt.executeUpdate();
+					
+				
+			}finally {
+				close(pstmt);
+			}
+		}
+		
+		return result;
+	}
+
+	public int deleteOrder(Connection conn, String[] orderNoList) throws Exception{
+		int result = 0;
+		for(int i=0; i<orderNoList.length; i++) {
+			try {
+				
+					String sql = prop.getProperty("updateOrder");
+					pstmt = conn.prepareStatement(sql);
+					pstmt.setString(1, orderNoList[i]);
+					result= pstmt.executeUpdate();
+				
+			}finally {
+				close(pstmt);
+			}
+		}
 		
 		return result;
 	}

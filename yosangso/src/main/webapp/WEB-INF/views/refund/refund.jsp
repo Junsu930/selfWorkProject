@@ -15,60 +15,70 @@
 		<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 		
 		<div class="container">
+		<c:if test="${empty refundList}">
+			<div class="not-exist-refund">
+				환불할 상품이 존재하지 않습니다.
+				<button id="back-button" type="button" onclick="location.href='${contextPath}'">메인 화면으로</button>
+			</div>
+			
+		</c:if>
+		<c:if test="${!empty refundList }">
             <div class="info-bar">
                 <div>
                     <span>환불신청</span>
                 </div>
                 <div>
-                    <strong>주문내역번호</strong> : 123124 - 123123
+                    <strong>주문내역번호</strong> : ${ refundList[0].orderNo }
                 </div>
             </div>
-            <form action="refundDone.html"  name="refund-form" id="main-form" method="get" onsubmit="return false">
+            <form action="refundDone"  name="refund-form" id="main-form" method="post" onsubmit="return false">
                 <div class="outer-line">
+				<c:forEach var="list" items="${refundList}">
                     <div class="refund-in-product-border">
                         <!-- 이미지 -->
                         <div>
                             <div class="img-div">
-                                <img src="./image/330639_208664_214.jpg" id="image2">
+                                <img src="${contextPath}/resources/image/all/${list.productName}.jpg" id="image2">
                             </div>
                         </div>
                         <!-- 이름과 가격 -->
                         <div class="product-detail-price">
                             <!-- 상품내용 -->
                             <div id="detail">
-                                상품내용입니다.
+                                ${list.productName }
                             </div>
                             <!-- 개별가격 -->
                             <div>
-                                <span class="prc-color">10,000 </span>원
+                                <span class="prc-color">${list.price } </span>원
                             </div>
                         </div>
                         <!-- 개수 -->
                         <div>
-                            1개
+                            ${list.buyingRate }개
                         </div>
                         <!-- 총 가격 -->
                         <div>
                             <div>상품 금액</div>
-                            10,000 원
-                        </div>
-                        <!-- 배송비 -->
-                        <div>
-                            <div>배송비</div>
-                            3000 원
+                            ${list.price * list.buyingRate} 원
                         </div>
                     </div>
+                    <input type="hidden" name="orderNo" value="${list.orderNo}">
+                   	<c:set var="sum" value="${sum + list.price * list.buyingRate }"/>
+               	</c:forEach>
                     <div class="price-tag">
                         <div>  
-                            상품 금액 10,000원  +  (배송비) 3000 원 = 최종 결제 금액 13,000원 
+                           총 환불 예정 금액 ${sum}원 
                         </div>
                         <div>
-                            <button id="refund-button" type="button" onclick="refundTest()">환불하기</button>
+                        	<input type="hidden" name="memberNo" value="${list.memberNo }">
+                            <button id="refund-button" type="button" onclick="refund()">환불하기</button>
                         </div>
                     </div>
                 </div>         
             </form>
+            </c:if>
         </div>
         <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+        <script type="text/javascript" src="${contextPath}/resources/js/refund.js"></script>
 	</body>
 </html>

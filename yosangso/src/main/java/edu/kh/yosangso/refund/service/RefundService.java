@@ -1,7 +1,6 @@
 package edu.kh.yosangso.refund.service;
 
-import static edu.kh.yosangso.common.JDBCTemplate.close;
-import static edu.kh.yosangso.common.JDBCTemplate.getConnection;
+import static edu.kh.yosangso.common.JDBCTemplate.*;
 
 import java.sql.Connection;
 import java.util.List;
@@ -21,6 +20,40 @@ public class RefundService {
 		
 		List<Order> result = dao.refundList(conn, memberNo);
 		
+		
+		close(conn);
+		
+		return result;
+	}
+
+	public int refundDone(String[] orderNoList) throws Exception {
+		int result= 0;
+		
+		Connection conn = getConnection();
+		
+		RefundDAO dao = new RefundDAO();
+		
+		result= dao.refundDone(conn, orderNoList);
+		
+		if(result>0) commit(conn);
+		else rollback(conn);
+		
+		close(conn);
+		
+		return result;
+	}
+
+	public int deleteOrder(String[] orderNoList) throws Exception{
+		int result= 0;
+		
+		Connection conn = getConnection();
+		
+		RefundDAO dao = new RefundDAO();
+		
+		result= dao.deleteOrder(conn, orderNoList);
+		
+		if(result>0) commit(conn);
+		else rollback(conn);
 		
 		close(conn);
 		
