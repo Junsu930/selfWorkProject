@@ -22,24 +22,27 @@ public class RefundDoneServlet extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		String[] orderNoList = req.getParameterValues("orderNo");
+
+		// 서비스 구현 시 일시적으로 memberNo을 부여
+		
 		String memberNo = req.getParameter("memberNo");
 		RefundService service = new RefundService();
-		List<Order> orderList = new ArrayList<>();
+		List<Order> refundList = new ArrayList<>();
 		
 		try {
 			
-			orderList = service.refundList(memberNo);
 			int result = service.refundDone(orderNoList);
 			
 			if(result>0) {
 				
-				int deleteResult = service.deleteOrder(orderNoList);
+				int refundResult = service.refundOrder(orderNoList);
 				
-				if(deleteResult>0) {
+				if(refundResult>0) {
+					// 서비스 구현 시 일시적으로 memberNo을 부여
+					refundList = service.refundList(memberNo);
 					String filePath = "/WEB-INF/views/refund/refundDone.jsp";
-					req.setAttribute("refundList", orderList);
+					req.setAttribute("forwardRefundList", refundList);
 					RequestDispatcher dispatcher = req.getRequestDispatcher(filePath);
-					
 					dispatcher.forward(req, resp);
 				}else {
 					System.out.println("수정실패");

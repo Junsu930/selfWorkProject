@@ -497,6 +497,10 @@
 				<input type="text" name="memberNo">
 				<button>환불페이지 부르기</button>
 			</form>
+			<form action="refundList" method="post">
+				<input type="text" name="refundMember">
+				<button>환불내역 부르기</button>
+			</form>
             </section>
 
 

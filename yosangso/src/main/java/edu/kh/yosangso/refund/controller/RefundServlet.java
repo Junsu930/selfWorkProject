@@ -25,7 +25,7 @@ public class RefundServlet extends HttpServlet{
 		try {
 			
 			RefundService service = new RefundService();
-			orderList = service.refundList(memberNo);
+			orderList = service.orderList(memberNo);
 			
 			
 			
@@ -35,7 +35,7 @@ public class RefundServlet extends HttpServlet{
 		
 		String path = "/WEB-INF/views/refund/refund.jsp";
 
-		req.setAttribute("refundList", orderList);
+		req.setAttribute("orderList", orderList);
 		
 		req.getRequestDispatcher(path).forward(req, resp);
 		

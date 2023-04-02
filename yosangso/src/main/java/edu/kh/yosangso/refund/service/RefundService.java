@@ -5,12 +5,14 @@ import static edu.kh.yosangso.common.JDBCTemplate.*;
 import java.sql.Connection;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import edu.kh.yosangso.order.model.vo.Order;
 import edu.kh.yosangso.refund.dao.RefundDAO;
 
 public class RefundService {
 
-	public List<Order> refundList(String memberNo) throws Exception{
+	public List<Order> orderList(String memberNo) throws Exception{
 		
 		
 		
@@ -18,7 +20,7 @@ public class RefundService {
 		
 		RefundDAO dao = new RefundDAO();
 		
-		List<Order> result = dao.refundList(conn, memberNo);
+		List<Order> result = dao.orderList(conn, memberNo);
 		
 		
 		close(conn);
@@ -43,14 +45,14 @@ public class RefundService {
 		return result;
 	}
 
-	public int deleteOrder(String[] orderNoList) throws Exception{
+	public int refundOrder(String[] orderNoList) throws Exception{
 		int result= 0;
 		
 		Connection conn = getConnection();
 		
 		RefundDAO dao = new RefundDAO();
 		
-		result= dao.deleteOrder(conn, orderNoList);
+		result= dao.refundOrder(conn, orderNoList);
 		
 		if(result>0) commit(conn);
 		else rollback(conn);
@@ -59,5 +61,36 @@ public class RefundService {
 		
 		return result;
 	}
+
+	public List<Order> refundList(String memberNo) throws Exception {
+		
+		Connection conn = getConnection();
+		
+		
+		
+		RefundDAO dao = new RefundDAO();
+		
+		List<Order> result = dao.refundList(conn, memberNo);
+		
+		close(conn);
+		
+		return result;
+	}
+
+	public List<Order> refundList(HttpSession session) throws Exception {
+		
+		Connection conn = getConnection();
+		
+		System.out.println("service에서 session 확인 : " + session.getAttribute("loginMemberNo") );
+		
+		RefundDAO dao = new RefundDAO();
+		
+		List<Order> result = dao.refundList(conn, session);
+		
+		close(conn);
+		
+		return result;
+	}
+
 
 }

@@ -14,6 +14,8 @@ import java.util.InvalidPropertiesFormatException;
 import java.util.List;
 import java.util.Properties;
 
+import javax.servlet.http.HttpSession;
+
 import edu.kh.yosangso.order.model.vo.Order;
 
 public class RefundDAO {
@@ -35,12 +37,12 @@ public class RefundDAO {
 		
 	}
 
-	public List<Order> refundList(Connection conn, String memberNo) throws Exception{
+	public List<Order> orderList(Connection conn, String memberNo) throws Exception{
 		List<Order> result = new ArrayList<>();
 		
 		try {
 			
-			String sql = prop.getProperty("refundList");
+			String sql = prop.getProperty("orderList");
 			
 			pstmt = conn.prepareStatement(sql);
 			
@@ -88,7 +90,7 @@ public class RefundDAO {
 		return result;
 	}
 
-	public int deleteOrder(Connection conn, String[] orderNoList) throws Exception{
+	public int refundOrder(Connection conn, String[] orderNoList) throws Exception{
 		int result = 0;
 		for(int i=0; i<orderNoList.length; i++) {
 			try {
@@ -101,6 +103,71 @@ public class RefundDAO {
 			}finally {
 				close(pstmt);
 			}
+		}
+		
+		return result;
+	}
+
+	public List<Order> refundList(Connection conn, String memberNo) throws Exception{
+		List<Order> result = new ArrayList<>();
+		
+		try {
+			
+			String sql = prop.getProperty("refundList");
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, memberNo);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				String productName = rs.getString("PRODUCT_NM");
+				int orderNo = rs.getInt("ORDER_NO");
+				int price = rs.getInt("PRICE");
+				int buyingRate = rs.getInt("BUYING_RATE");
+				
+				result.add(new Order(productName, orderNo, price, buyingRate));
+				
+			}
+			
+		}finally {
+			
+			close(rs);
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public List<Order> refundList(Connection conn, HttpSession session) throws Exception{
+		List<Order> result = new ArrayList<>();
+		
+		try {
+			
+			System.out.println("DAO에서 session 확인 : " + session.getAttribute("loginMemberNo") );
+			
+			String sql = prop.getProperty("refundList");
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, (String)session.getAttribute("loginMemberNo"));
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				String productName = rs.getString("PRODUCT_NM");
+				int orderNo = rs.getInt("ORDER_NO");
+				int price = rs.getInt("PRICE");
+				int buyingRate = rs.getInt("BUYING_RATE");
+				
+				result.add(new Order(productName, orderNo, price, buyingRate));
+			}
+			
+		}finally {
+			
+			close(rs);
+			close(pstmt);
 		}
 		
 		return result;
