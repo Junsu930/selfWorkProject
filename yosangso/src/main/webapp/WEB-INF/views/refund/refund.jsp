@@ -54,7 +54,7 @@
                         </div>
                         <!-- 개수 -->
                         <div>
-                            ${list.buyingRate }개
+                            ${list.buyingRate}개
                         </div>
                         <!-- 총 가격 -->
                         <div>

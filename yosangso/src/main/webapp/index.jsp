@@ -65,9 +65,6 @@
 
                 </section>
 
-
-
-
                 <!-- 2 베스트부분 시작 -->
                 <section class="bestPart">
 

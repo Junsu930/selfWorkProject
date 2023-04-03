@@ -36,7 +36,6 @@ public class RefundListServlet extends HttpServlet{
 		
 		try {
 			
-			System.out.println("서블릿에서 세션 확인 : " + loginMemberSession.getAttribute("loginMemberNo"));
 			
 			refundList = service.refundList(loginMemberSession);
 			

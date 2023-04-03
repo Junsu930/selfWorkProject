@@ -67,10 +67,10 @@ public class RefundService {
 		Connection conn = getConnection();
 		
 		
-		
 		RefundDAO dao = new RefundDAO();
 		
 		List<Order> result = dao.refundList(conn, memberNo);
+
 		
 		close(conn);
 		
