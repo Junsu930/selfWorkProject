@@ -91,6 +91,7 @@
 	                            
 	                        </div>
 	                    </div>
+                        <input type="hidden" value="${list.cartNo}" name="cartList">
 	                   <c:set var="total" value ="${total + eachTotal}"/>
 	                </c:forEach>     
                     <div class="price-tag">
@@ -100,7 +101,6 @@
                             상품 금액 ${total} 원 +  (배송비) 
                             ${ deliveryTip }원 = 최종 결제 금액 ${total + deliveryTip }원 
                         </div>
-                        <input type="hidden" value="${cartList[0].memberNo}" name="memberNo">
                         <div>
                             <button id="pay-button">결제하기</button>
                         </div>

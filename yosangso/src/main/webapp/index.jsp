@@ -1,6 +1,7 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -28,7 +29,7 @@
 <body>
     <!-- 헤더, 컨텐츠 -->
     <main>
-    
+  
     	<!-- 헤더 -->
     	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
     
@@ -80,7 +81,7 @@
                             <a href="#">    
                                 <div class="BNitemPic bestItem1Pic"> 
                                     <figcaption>베스트제품1<br><br> 상세설명칸<br><br> 입니다 </figcaption>
-                                    <img src="${contextPath }/resources/image/index/제품_오쏘뮬.jpg" 
+                                    <img src="${contextPath}/resources/image/index/제품_오쏘뮬.jpg" 
                                         alt="제품사진" id="bestItemPhoto1">
                                 </div>
                             </a>
@@ -497,6 +498,9 @@
 			<form action="refundList" method="post">
 				<input type="text" name="refundMember">
 				<button>환불내역 부르기</button>
+			</form>
+			<form action="boardTest" method="post">
+				<button>보드테스트 부르기</button>
 			</form>
             </section>
 

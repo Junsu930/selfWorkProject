@@ -6,15 +6,4 @@ public class ProductService {
 
 	private ProductDAO dao = new ProductDAO();
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }

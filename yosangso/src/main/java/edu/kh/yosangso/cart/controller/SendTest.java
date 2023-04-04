@@ -15,11 +15,10 @@ public class SendTest extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		String[] product = req.getParameterValues("productNo");
-		String[] count = req.getParameterValues("count");
 		
-		System.out.println(Arrays.toString(product));
-		System.out.println(Arrays.toString(count));
+		String[] cartList = req.getParameterValues("cartList");
+		
+		System.out.println(Arrays.toString(cartList));
 		
 		
 		
