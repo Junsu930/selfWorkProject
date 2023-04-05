@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
@@ -29,6 +28,7 @@
 <body>
     <!-- 헤더, 컨텐츠 -->
     <main>
+   
   
     	<!-- 헤더 -->
     	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
@@ -37,12 +37,10 @@
         <!-- 내용 작성 공간입니다.(template2) -->
         <!-- content 전체 감싸는 영역 -->
         <section class="content-container">
-
+        
             <!-- 왼쪽사이드 -->
             <section class="leftSide">
             </section>
-
-
             <!-- 가운데페이지 -->
             <section class="center">
 
@@ -499,7 +497,7 @@
 				<input type="text" name="refundMember">
 				<button>환불내역 부르기</button>
 			</form>
-			<form action="boardTest" method="post">
+			<form action="boardTest" method="get">
 				<button>보드테스트 부르기</button>
 			</form>
             </section>
