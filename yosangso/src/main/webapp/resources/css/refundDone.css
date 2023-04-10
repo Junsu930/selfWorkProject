@@ -1,15 +1,4 @@
 
-.content{
-    width: 1280px;
-    height: 150%;
-    margin : auto;
-    display:flex;
-    flex-direction: column;
-    overflow: auto;
-}
-
-
-
 /* 환불 바 */
 .info-bar{
     width: 80%;
